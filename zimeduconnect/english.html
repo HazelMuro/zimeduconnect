@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ENGLISH</title>
+  <style>
+    /* CSS styling for the dashboard */
+    body {
+      background-image: url(sub.png);
+      font-family: Arial, sans-serif;
+    }
+    .header {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .tab {
+      background: linear-gradient(to right, #ff00ff, #800080);
+      color: #ffffff;
+      padding: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px 5px 0 0;
+      transition: background-color 0.3s ease;
+    }
+    .active-tab {
+      background: linear-gradient(to right, #ffffff, #cccccc);
+      color: #800080;
+    }
+    .content {
+      display: none;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 0 5px 5px 5px;
+    }
+    .group-chat {
+      width: 300px;
+      height: 400px;
+      border: 1px solid #800080;
+      padding: 10px;
+      overflow-y: scroll;
+    }
+    .message-input {
+      width: 250px;
+      padding: 5px;
+      margin-top: 10px;
+    }
+    .send-button {
+      background-color: #800080;
+      color: #ffffff;
+      border: none;
+      padding: 5px 10px;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+    .exam-papers {
+      display: flex;
+      justify-content: space-between;
+    }
+    .exam-papers-column {
+      flex-basis: 40%;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>MATHEMATICS</h1>
+  </div>
+  <div class="container">
+    <button class="tab active-tab" data-content="past-exams">Past Exam Papers</button>
+    <button class="tab" data-content="textbooks">Textbooks</button>
+    <button class="tab" data-content="quizzes">Quizzes and Tests</button>
+    <button class="tab" data-content="other">Other Material</button>
+    <button class="tab" data-content="group-chat">Group Chat</button>
+  </div>
+  <div id="past-exams" class="content" style="display: block;">
+    <!-- Past Exam Papers content -->
+    <h2>Past Exam Papers</h2>
+    <div class="exam-papers">
+      <div class="exam-papers-column">
+        <h3>ZIMSEC</h3>
+        <ul>
+          <li><a href="#">ZIMSEC Exam Paper 1</a></li>
+          <li><a href="#">ZIMSEC Exam Paper 2</a></li>
+          <li><a href="#">ZIMSEC Exam Paper 3</a></li>
+        </ul>
+      </div>
+      <div class="exam-papers-column">
+        <h3>Cambridge</h3>
+        <ul>
+          <li><a href="#">Cambridge Exam Paper 1</a></li>
+          <li><a href="#">Cambridge Exam Paper 2</a></li>
+          <li><a href="#">Cambridge Exam Paper 3</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="textbooks" class="content">
+    <!-- Textbooks content -->
+    <h2>Textbooks</h2>
+    <!-- Add your content here -->
+  </div>
+  <div id="quizzes" class="content">
+    <!-- Quizzes and Tests content -->
+    <h2>Quizzes and Tests</h2>
+    <!-- Add your content here -->
+  </div>
+  <div id="other" class="content">
+    <!-- Other Material content -->
+    <h2>Other Material</h2>
+    <!-- Add your content here -->
+  </div>
+  <div id="group-chat" class="content">
+    <!-- Group Chat content -->
+    <h2>Group Chat</h2>
+    <div class="group-chat" id="chat-messages"></div>
+    <input type="text" id="message-input" class="message-input" placeholder="Type your message">
+   <button id="send-button" class="send-button">Send</button>
+  </div>
+
+  <script>
+    // JavaScript code to handle tab switching and group chat
+    document.addEventListener("DOMContentLoaded", function() {
+      const tabs = document.getElementsByClassName("tab");
+      const contents = document.getElementsByClassName("content");
+
+      // Show the initial active tab content
+      const initialTab = tabs[0];
+      const initialContentId = initialTab.getAttribute("data-content");
+      showContent(initialContentId);
+
+      // Add event listeners to the tabs
+      for (let i = 0; i < tabs.length; i++) {
+        tabs[i].addEventListener("click", function(event) {
+          const contentId = this.getAttribute("data-content");
+          showContent(contentId);
+        });
+      }
+
+      // Function to show content based on contentId
+      function showContent(contentId) {
+        // Hide all contents and remove active tab class
+        for (let i = 0; i < contents.length; i++) {
+          contents[i].style.display = "none";
+        }
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].classList.remove("active-tab");
+        }
+
+        // Show selected content and set active tab class
+        document.getElementById(contentId).style.display = "block";
+        const activeTab = document.querySelector(`[data-content="${contentId}"]`);
+        activeTab.classList.add("active-tab");
+      }
+
+      // Group Chat functionality
+      const messageInput = document.getElementById("message-input");
+      const chatMessages = document.getElementById("chat-messages");
+
+      function sendMessage() {
+        const message = messageInput.value.trim();
+        if (message !== "") {
+          const timestamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+          // Create a new message element
+          const newMessage = document.createElement("div");
+          newMessage.textContent = `[${timestamp}] You: ${message}`;
+          chatMessages.appendChild(newMessage);
+
+          // Clear the input field
+          messageInput.value = "";
+        }
+      }
+
+      // Add event listener to the send button
+      const sendButton = document.getElementById("send-button");
+      sendButton.addEventListener("click", sendMessage);
+    });
+  </script>
+</body>
+</html>

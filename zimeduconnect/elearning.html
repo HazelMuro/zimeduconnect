@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subject Listing</title>
+<style>
+  body {
+  
+  font-family: 'Sofia';font-size: 44px;
+  background: url(sub.png);
+}
+  .subject {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .description {
+    display: none;
+    margin-left: 20px;
+    font-style: italic;
+  }
+  .button1 {
+  
+  color: #fff;
+  background-color: #8a4fa5;;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 15px 15px;
+            margin: 50px;
+            border: none;
+            outline: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Sofia', sans-serif;
+            font-size: 26px;
+            text-decoration: none;
+            float: left;
+            
+            
+        }
+
+.button1:hover {
+            background-color: #cf05ee;
+}
+.button1:active {
+  background-color: #249bf0;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);}
+
+.button1 {
+          
+            display: block;
+        }
+</style>
+</head>
+<body>
+  <a href="feed.html" class="button1">feedback</a>
+  <a href="sub.html" class="button1">subject listing</a>
+ 
+
+
+
+<script>
+  // Get all subject elements
+  const subjects = document.querySelectorAll('.subject');
+
+  // Add click event listener to each subject
+  subjects.forEach(subject => {
+    subject.addEventListener('click', () => {
+      // Toggle display of description when subject is clicked
+      const description = subject.nextElementSibling;
+      description.style.display = description.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+</script>
+
+</body>
+</html>

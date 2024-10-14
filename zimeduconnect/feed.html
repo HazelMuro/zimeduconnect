@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Form</title>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url(sub.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .feedback-form {
+      width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #8a4fa5;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+    label, textarea, input[type="email"], button {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    label {
+      color: #fff;
+      font-size: 18px;
+    }
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+    input[type="email"], button {
+      background-color: #fff;
+      color: #8a4fa5;
+    }
+    button {
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #fff;
+      color: #8a4fa5;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: -10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="feedback-form">
+    <h2 style="color: #fff;">Feedback Form</h2>
+    <form action="feed.php" method="post">
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="feedback">Your Feedback:</label>
+      <textarea id="feedback" name="feedback" rows="4" required></textarea>
+      <button type="submit">Submit Feedback</button>
+      <button type="button" id="delete-button">Delete Feedback</button>
+    </form>
+    <div class="error" id="email-error"></div>
+  </div>
+  
+  <script>
+    // Email format validation
+    document.getElementById("email").addEventListener("input", function() {
+      var emailInput = document.getElementById("email");
+      var emailError = document.getElementById("email-error");
+      if (!emailInput.validity.valid) {
+        emailError.textContent = "Please enter a valid email address.";
+      } else {
+        emailError.textContent = "";
+      }
+    });
+
+    // Delete button functionality
+    document.getElementById("delete-button").addEventListener("click", function() {
+      document.getElementById("email").value = "";
+      document.getElementById("feedback").value = "";
+      document.getElementById("email-error").textContent = "";
+    });
+  </script>
+</body>
+</html>

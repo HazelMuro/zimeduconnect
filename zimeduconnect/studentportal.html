@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Student Portal - ZimEduConnect</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Sofia';
+      font-size: 44px;
+      background: url(4.png);
+    }
+
+    #mySidenav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: absolute;
+      left: 0;
+      padding: 15px;
+      width: 150px;
+    }
+
+    #mySidenav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      font-size: 20px;
+      color: white;
+      border-radius: 0 5px 5px 0;
+      padding: 15px;
+      width: 100%;
+      margin-bottom: 10px;
+      background-color: blueviolet;
+    }
+
+    #content {
+      margin-left: 170px;
+      padding: 20px;
+      background-color: none;
+      color: azure;
+      
+    }
+
+    #content h1 {
+      font-size: 28px;
+      
+      
+    }
+
+    #home {
+      background-color: blueviolet;
+    }
+
+    #assignment {
+      background-color: #666;
+    }
+
+    #tests {
+      background-color: blueviolet;
+    }
+
+    #quiz {
+      background-color: #666;
+    }
+
+    #myaccount {
+      background-color: blueviolet;
+    }
+  </style>
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="welcome.html" id="home" onclick="showContent('Home')"><span>Home</span><i class="fas fa-home"></i></a>
+  <a href="#" id="assignment" onclick="showContent('Assignments')"><span>Assignments</span><i class="fas fa-tasks"></i></a>
+  <a href="class.html" id="class" onclick="showContent('class')"><span>classes</span><i class="fas fa-clipboard"></i></a>
+  <a href="#" id="quiz" onclick="showContent('Quiz')"><span>Quiz</span><i class="fas fa-question-circle"></i></a>
+  <a href="#" id="myaccount" onclick="showContent('My Account')"><span>My Account</span><i class="fas fa-user-circle"></i></a>
+</div>
+
+<div id="content">
+  <h1 id="pageTitle">Welcome</h1>
+  <!-- Add a new div to display the account details -->
+  <div id="accountDetails" class="hidden"></div> 
+</div>
+
+<script>
+  /* Define a global variable to store the user's account details */
+  let userDetails = {
+    email: '',
+    firstname: '',
+    lastname: '',
+    idnumber: '',
+    dob: '',
+    phone: '',
+    highschoolname: '',
+    permanentaddress: ''
+  };
+
+  function showContent(page) {
+    // Update the page title
+    document.getElementById('pageTitle').textContent = page;
+
+    // Hide the account details div
+    document.getElementById('accountDetails').classList.add('hidden');
+
+    // Check if the "My Account" tab was clicked
+    if (page === 'My Account') {
+      // Check if the user details are already loaded
+      if (userDetails.email !== '') {
+        // Display the account details
+        displayAccountDetails();
+      } else {
+        // Fetch the user details and display them
+        fetchAccountDetails();
+      }
+    }
+  }
+
+  function fetchAccountDetails() {
+    fetch('fetch_details.php')
+      .then(response => response.json())
+      .then(data => {
+        // Store the fetched account details in the global variable
+        userDetails = data;
+
+        // Display the account details
+        displayAccountDetails();
+      })
+      .catch(error => {
+        console.error('Error fetching account details:', error);
+        document.getElementById('accountDetails').innerHTML = 'Error fetching account details.';
+      });
+  }
+
+  function displayAccountDetails() {
+    const accountDetails = document.getElementById('accountDetails');
+
+    // Populate the account details HTML
+    accountDetails.innerHTML = `
+      <h2>Account Details</h2>
+      <p><b>Email:</b> ${userDetails.email}</p>
+      <p><b>First Name:</b> ${userDetails.firstname}</p>
+      <p><b>Last Name:</b> ${userDetails.lastname}</p>
+      <p><b>ID Number:</b> ${userDetails.idnumber}</p>
+      <p><b>Date of Birth:</b> ${userDetails.dob}</p>
+      <p><b>Phone Number:</b> ${userDetails.phone}</p>
+      <p><b>High School Name:</b> ${userDetails.highschoolname}</p>
+      <p><b>Permanent Address:</b> ${userDetails.permanentaddress}</p>
+    `;
+
+    // Show the account details div
+    accountDetails.classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>

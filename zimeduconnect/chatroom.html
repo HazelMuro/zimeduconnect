@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>chatroom - ZimEduConnect</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-image: url(cr.png);
+    }
+    .group-chat {
+      width: 300px;
+      height: 400px;
+      border: 1px solid #800080;
+      padding: 10px;
+      overflow-y: scroll;
+      background-color: #ffffff;
+    }
+    .message-input {
+      width: 250px;
+      padding: 5px;
+      margin-top: 10px;
+    }
+    .send-button {
+      background-color: #800080;
+      color: #ffffff;
+      border: none;
+      padding: 5px 10px;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="group-chat" id="chat-messages"></div>
+  <form id="message-form">
+    <input type="text" id="message-input" class="message-input" placeholder="Type your message">
+    <button id="send-button" class="send-button" type="submit">Send</button>
+  </form>
+  
+  <script>
+   const messageInput = document.getElementById("message-input");
+const chatMessages = document.getElementById("chat-messages");
+
+function sendMessage(event) {
+  event.preventDefault(); // Prevent the form from being submitted and the page from reloading
+
+  const message = messageInput.value.trim();
+  if (message !== "") {
+    const timestamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+    // Create a new message element
+    const newMessage = document.createElement("div");
+    newMessage.textContent = `[${timestamp}] You: ${message}`;
+    chatMessages.appendChild(newMessage);
+
+    // Clear the input field
+    messageInput.value = "";
+  }
+}
+
+// Add event listener to the send button
+const sendButton = document.getElementById("send-button");
+sendButton.addEventListener("click", sendMessage);
+  </script>
+</body>
+</html>

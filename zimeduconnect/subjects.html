@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Subjects</title>
+  <style>
+    /* CSS styling for the dashboard */
+    body {
+      background-image: url(sub.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+    }
+    .header {
+      background-color: black;
+      color: #ffffff;
+      padding: 10px;
+      text-align: center;
+    }
+    .subject-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .subject-card {
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 200px;
+      margin: 20px;
+      padding: 2xd0px;
+    }
+    .subject-card:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .search-form {
+      text-align: center;
+      margin-bottom: 20px;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Subjects</h1>
+  </div>
+  <!-- Search form -->
+  <div class="search-form">
+    <form id="search-form" action="search.php" method="POST">
+      <input type="text" id="keywords" name="keywords" placeholder="Search">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  <div class="subject-list">
+    <div class="subject-card">
+      <h2>Mathematics</h2>
+      <p>Advanced mathematics concepts and problem-solving.</p>
+      <a href="MATHEMATICS.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>English Language</h2>
+      <p>Language skills, literature, and communication.</p>
+      <a href="english.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Physics</h2>
+      <p>Study of matter, energy, and their interactions.</p>
+      <a href="physics.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Chemistry</h2>
+      <p>Properties, composition, and reactions of substances.</p>
+      <a href="dashboard.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Biology</h2>
+      <p>Study of living organisms and their ecosystems.</p>
+      <a href="biology.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Geography</h2>
+      <p>Study of the Earth's physical features and human activities.</p>
+      <a href="geography.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>History</h2>
+      <p>Understanding past events and their significance.</p>
+      <a href="history.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Agriculture</h2>
+      <p>Principles and practices of crop and animal production.</p>
+      <a href="agriculture.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Computer Science</h2>
+      <p>Study of computers, programming, and information technology.</p>
+      <a href="computerscience.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Accounting</h2>
+      <p>Principles and practices of financial record-keeping and reporting.</p>
+      <a href="accounting.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Business Studies</h2>
+      <p>Understanding business principles, management, and entrepreneurship.</p>
+      <a href="BS.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Economics</h2>
+      <p>Study of the production, distribution, and consumption of goods and services.</p>
+      <a href="economics.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Literature in English</h2>
+      <p>Exploration and analysis of literary texts.</p>
+      <a href="literature.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Additional Mathematics</h2>
+      <p>Advanced topics in mathematics beyond thestandard curriculum.</p>
+      <a href="addmaths.html">View</a>
+    </div>
+    <div class="subject-card">
+      <h2>Shona</h2>
+      <p>Study of the Shona language and its literature.</p>
+      <a href="shona.html">View</a>
+    </div>
+
+  <!-- Subject cards -->
+  <div class="subject-list" id="subject-list">
+    <!-- Subject cards will be populated dynamically -->
+  </div>
+
+  <script>
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const keywords = document.getElementById('search-input').value;
+
+      // Send AJAX request to PHP script
+      fetch(search.php?keywords=${keywords})
+        .then(response => response.json())
+        .then(data => {
+          // Display search results
+          displaySearchResults(data);
+        });
+    });
+
+    function displaySearchResults(results) {
+      const subjectListDiv = document.getElementById('subject-list');
+      subjectListDiv.innerHTML = ''; // Clear previous results
+
+      // Render search results
+      results.forEach(subject => {
+        const subjectCard = document.createElement('div');
+        subjectCard.classList.add('subject-card');
+        subjectCard.innerHTML = `
+          <h2>${subject.title}</h2>
+          <p>${subject.description}</p>
+          <a href="${subject.url}">View</a>
+        `;
+        subjectListDiv.appendChild(subjectCard);
+      });
+    }
+  </script>
+</body>
+</html>

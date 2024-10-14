@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subject Listing</title>
+<style>
+  .subject-description {
+    display: none;
+    margin-left: 20px;
+    font-style: italic;
+  }
+
+  .subject-listing-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 150px; /* Set the width to fit the content */
+  }
+
+  .subject-link {
+    display: block;
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+
+<button id="subject-listing-toggle" class="subject-listing-button">Subject Listing</button>
+<a href="subjects.html" class="subject-listing-button">subjects</a>
+
+<!-- Links for each subject -->
+<a href="#" class="subject-link">Mathematics</a>
+<div class="subject-description">Mathematics is the study of numbers, quantities, and shapes.</div>
+
+<a href="#" class="subject-link">English Language</a>
+<div class="subject-description">English Language is the study of the English language, including grammar, vocabulary, and literature.</div>
+
+<a href="#" class="subject-link">Physics</a>
+<div class="subject-description">Physics is the study of matter, energy, and the fundamental forces of nature.</div>
+
+<a href="#" class="subject-link">Chemistry</a>
+<div class="subject-description">Chemistry is the study of matter, its properties, composition, and reactions.</div>
+
+<a href="#" class="subject-link">Biology</a>
+<div class="subject-description">Biology is the study of living organisms and their interactions with each other and their environments.</div>
+
+<a href="#" class="subject-link">Geography</a>
+<div class="subject-description">Geography is the study of the Earth's landscapes, environments, and the relationships between people and their environments.</div>
+
+<a href="#" class="subject-link">History</a>
+<div class="subject-description">History is the study of past events, particularly in human affairs.</div>
+
+<a href="#" class="subject-link">Agriculture</a>
+<div class="subject-description">Agriculture is the science and art of cultivating plants and raising animals for food, fiber, and other products.</div>
+
+<a href="#" class="subject-link">Computer Science</a>
+<div class="subject-description">Computer Science is the study of computers and computational systems.</div>
+
+<a href="#" class="subject-link">Accounting</a>
+<div class="subject-description">Accounting is the measurement, processing, and communication of financial information about economic entities.</div>
+
+<a href="#" class="subject-link">Business Studies</a>
+<div class="subject-description">Business Studies is the study of how businesses operate and the principles and practices of management.</div>
+
+<a href="#" class="subject-link">Economics</a>
+<div class="subject-description">Economics is the study of how societies allocate scarce resources to satisfy their unlimited wants and needs.</div>
+
+<a href="#" class="subject-link">Literature in English</a>
+<div class="subject-description">Literature in English is the study of literary works written in the English language.</div>
+
+<a href="#" class="subject-link">Additional Mathematics</a>
+<div class="subject-description">Additional Mathematics is an advanced level mathematics course that extends beyond the scope of the standard mathematics curriculum.</div>
+
+<a href="#" class="subject-link">Shona</a>
+<div class="subject-description">Shona is a Bantu language spoken by the Shona people of Zimbabwe.</div>
+
+<script>
+  const subjectListingToggle = document.getElementById('subject-listing-toggle');
+  const subjectLinks = document.querySelectorAll('.subject-link');
+
+  // Add click event listener to toggle subject listing
+  subjectListingToggle.addEventListener('click', () => {
+    subjectLinks.forEach(subjectLink => {
+      subjectLink.style.display = subjectLink.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+
+  subjectLinks.forEach(subjectLink => {
+    subjectLink.addEventListener('click', () => {
+      const description = subjectLink.nextElementSibling;
+      description.style.display = description.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+</script>
+
+</body>
+</html>

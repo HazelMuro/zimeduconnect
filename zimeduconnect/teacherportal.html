@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(4.png);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        
+        .title {
+            font-size: 36px; /* Increase title size */
+            font-weight: bold; /* Make title bolder */
+            margin-bottom: 20px; /* Drop down the title a bit more */
+            color: white;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px; /* Add margin to separate buttons from title */
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 25px; /* Increase button padding */
+            background-color: #8a4fa5; /* Change button color to grey */
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f5f5f5;
+            padding: 10px;
+            text-align: center;
+        }
+        .form-container {
+            display: none; /* Initially hide the form */
+            margin-top: 60px;
+            max-width: 200px;
+            width: 100%;
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+        }
+        .form-input {
+            margin-bottom: 10px;
+        }
+        .class-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .class-item {
+            margin-bottom: 10px;
+        }
+        .class-link {
+            color: #000;
+            text-decoration: none;
+        }
+        .test-section,
+        .assignment-section {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .answer-container {
+            margin-top: 10px;
+        }
+        .answer-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Teacher Portal</div>
+    </div>
+    <div class="button-container">
+        <a href="#" class="button" onclick="showForm()">Create Class</a>
+        <a href="#" class="button" onclick="showClassList()">View Classes</a>
+        <a href="subjects.html" class="button">Subjects</a>
+        <a href="index.php" class="button">Chatroom</a>
+    </div>
+    <div class="form-container" id="formContainer">
+        <form id="classForm" action="create_class.php" method="POST">
+            <input type="text" class="form-input" id="className" name="className" placeholder="Enter class name" required>
+            <button type="submit" class="button">Create</button>
+        </form>
+    </div>
+    <div class="class-list" id="classListContainer" style="display: none;">
+        <h2>Classes</h2>
+        <ul id="classList"></ul>
+    </div>
+    <div class="footer">
+        <p>ZimEduConnect. Your one stop for all educational resources.</p>
+    </div>
+
+    <script>
+        var classes = []; // Array to store created classes
+
+        function showForm() {
+            var formContainer = document.getElementById('formContainer');
+            formContainer.style.display = 'block';
+            document.getElementById('classListContainer').style.display = 'none';
+        }
+
+        function showClassList() {
+            var formContainer = document.getElementById('formContainer');
+            formContainer.style.display = 'none';
+            var classListContainer = document.getElementById('classListContainer');
+            classListContainer.style.display = 'block';
+
+            var classList = document.getElementById('classList');
+            classList.innerHTML = ''; // Clear previous content
+
+            // Populate the list of classes
+            classes.forEach(function(className) {
+                var listItem = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = 'class_pages/' + className + '.php'; // Assuming PHP pages are stored in a directory named "class_pages"
+                link.textContent = className;
+                link.classList.add('class-link');
+                listItem.appendChild(link);
+                listItem.classList.add('class-item');
+                classList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
